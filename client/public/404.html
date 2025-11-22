@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+    <script>
+        // Get the path that was requested
+        const path = window.location.pathname;
+        
+        // Redirect to the home page with the path as a query parameter
+        // This allows the SPA to handle routing on the client side
+        const segments = path.split('/').filter(Boolean);
+        
+        // If there's a path (not just the root), redirect to home with the path
+        if (segments.length > 0) {
+            // Remove the repository name from the path if it exists
+            const repoName = 'ds-portfolio';
+            if (segments[0] === repoName) {
+                segments.shift();
+            }
+            
+            // Redirect to home with the original path preserved
+            window.location.replace('/' + (segments[0] ? repoName + '/' : '') + '#' + path.split(repoName)[1]);
+        } else {
+            // If it's just the root, go to the home page
+            window.location.replace('/ds-portfolio/');
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
